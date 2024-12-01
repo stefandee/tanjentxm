@@ -29,18 +29,19 @@ openfl test html5
 ```
 
 ## Version History
-2014-01-01  Version 1.0 - First released version
-2014-05-12  Version 1.1 - Small fix and updated examples
-                          for OpenFL 1.4.0+ and libgdx 1.0+
-2014-08-20  Version 1.2 - Small fix and updated examples
-                          for OpenFL 2.0.1+** and libgdx 1.3.1+
-2015-08-11	Version 1.3 - New "interactive" functions:
-							* Support for note row data insertion
-							* Support for pattern order/row jumping
-						  Looping envelopes bugfix
-						  Updated example with new songs and
-						  interactive controls for
-						  OpenFL 3.1.0+* and libgdx 1.6.4+
+
+- 2015-08-11 (Version 1.3) 
+  - New "interactive" functions:
+	* Support for note row data insertion
+	* Support for pattern order/row jumping							
+  - Looping envelopes bugfix
+  - Updated example with new songs and interactive controls for OpenFL 3.1.0+* and libgdx 1.6.4+
+- 2014-08-20 (Version 1.2) 
+  - Small fix and updated examples for OpenFL 2.0.1+** and libgdx 1.3.1+  
+- 2014-05-12 (Version 1.1) 
+  - Small fix and updated examples for OpenFL 1.4.0+ and libgdx 1.0+ |						 
+- 2014-01-01 (Version 1.0)
+  - First released version
 
 *) As of now projects targetting OpenFL 3.1 must be compiled with the "-Dlegacy"
 flag set to ON to support streaming audio events.

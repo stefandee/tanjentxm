@@ -1,34 +1,8 @@
-# TanjentXM
+TanjentXM is a free and open source library to play FastTracker II (FT2)
+.XM-files for HaXe 3+ and Java.
 
-TanjentXM is a free and open source library to play FastTracker II (FT2) .XM-files for HaXe 3+ and OpenFL.
-
-The current version works with Haxe 4.3.6 and OpenFL 9.4.0 and it was tested for the HTML5 platform. Other platforms supported by OpenFL may work as well, but they were not tested yet.
-
-I have found this library in an old installation of Haxe 3. I meant to test it for tracker music when ported [Loose Cannon](https://www.pirongames.com/loose-cannon-physics/), [Knight&Witch](https://www.pirongames.com/knight-and-witch/) and [Laser Lab](https://www.pirongames.com/laser-lab/) from Flash to HTML5, but I've forgot about it and went with another XM library (my own Haxe port of FlodXM).
-
-It seems that the site where this library originated has disappared and I couldn't track its creator, Jonas Murman. The library seems useful and stable, so I've decided to port it to Haxe 4 and since its license is MIT, released it.
-
-If you're the author of this piece, thank you for coding it and please feel free to take over it :)
-
-Find below install instructions as well as the original readme.
-
-## Install&Usage
-
-The Git project is setup as a Haxe library and may be installed with:
-
-```console
-haxelib git tanjentxm https://github.com/stefandee/tanjentxm.git
-```
-
-Of course, this repository may be cloned and a absolute/relative src dependency may be added to your project.
-
-The project comes with an [example project](https://github.com/stefandee/tanjentxm/tree/main/examples/haxe/TanjentXM1_3). This may be run with:
-
-```console
-openfl test html5
-```
-
-## Version History
+Version History
+=======================================================================
 2014-01-01  Version 1.0 - First released version
 2014-05-12  Version 1.1 - Small fix and updated examples
                           for OpenFL 1.4.0+ and libgdx 1.0+
@@ -52,16 +26,17 @@ SampleDataEvent.hx file in:
 ... \openfl\2,0,1\backends\native\openfl\events\SampleDataEvent.hx
 
 Make sure the class constructor looks like this (i.e. uncomment lines 20 and 21):
-```haxe
+---
 	public function new (type:String, bubbles:Bool = false, cancelable:Bool = false) {	
 		super (type, bubbles, cancelable);		
 		data = new ByteArray ();
 		data.bigEndian = false;
 		position = 0.0;		
 	}
-```
+---
 						  
-## Introduction
+Introduction
+=======================================================================
 This is an XM-file playback library written in Java and the HaXe 3.0
 language. 
 
@@ -84,24 +59,21 @@ Since (1) and (2) does not rely on any special libraries it should be
 easy to port this library to other (game) libraries that support dynamic
 (streaming) sound output, the only part that will need rewriting is (3).
 
-## Example Playback code (HaXe)
+Example Playback code (HaXe)
+=======================================================================
 To play XM-files loaded as ByteArray-assets in a OpenFL/HaXe project the
 following code can be used as a starting point:
-
-```haxe
+	
 	var myPlayer:Player = new Player();
 	var moduleOne:Int = myPlayer.loadXM(Assets.getBytes("assets/moduleOne.xm"), 0);	
 	var moduleTwo:Int = myPlayer.loadXM(Assets.getBytes("assets/moduleTwo.xm"), 0);	
 	myPlayer.play(moduleOne);
-```
 	
 To fade out the current playing song for 0.25 seconds and play a new 
 song with a fade-in of 1 second you can call the play() function with 
 the following parameters: 	
 
-```haxe
 	myPlayer.play(moduleTwo, true, true, 0.25, 1);
-```	
 	
 The first boolean specifies if the module should restart when playback
 starts. The second boolean specifies if the module should loop from
@@ -110,30 +82,69 @@ reached the end.
 	
 To stop the player, call:
 	
-```haxe
 	myPlayer.stop();
-```
 	
 To completely halt the player and stop the SampleDataEvent from
 firing (saves CPU/Battery) call:
 
-```haxe
 	myPlayer.halt();
-```	
 	
 To re-start a halted player you have to create a new player and add the 
 modules again: 
 	
-```haxe	
 	var myNewPlayer:Player = new Player();
 	moduleOne = myNewPlayer.addXMModule(myPlayer.getModule(moduleOne));
 	moduleTwo = myNewPlayer.addXMModule(myPlayer.getModule(moduleTwo));
 	myNewPlayer.play(moduleOne);
-```	
 
 Please take a look at the provided examples in the examples folder.
 
-## Design
+Example Playback code (Java)
+=======================================================================
+To play XM-files loaded as assets in a libgdx project the following code
+can be used as a starting point:
+	
+	Player myPlayer = new Player(44100, Player.INTERPOLATION_MODE_NONE);
+	int moduleOne = myPlayer.loadXM(Gdx.files.internal("data/moduleOne.xm").readBytes(), 0);	
+	int moduleTwo = myPlayer.loadXM(Gdx.files.internal("data/moduleTwo.xm").readBytes(), 0);	
+	myPlayer.play(moduleOne, true, true, 0, 0);
+
+To fade out the current playing song for 0.25 seconds and play a new 
+song with a fade-in of 1 second you can call the play() function with 
+the following parameters: 	
+
+	myPlayer.play(moduleTwo, true, true, 0.25, 1);	
+
+The first boolean specifies if the module should restart when playback
+starts. The second boolean specifies if the module should loop from
+the beginning (or the specified restart pattern index) when it has
+reached the end. 
+
+To pause the player, call:
+	
+	myPlayer.pause();
+
+To resume the player, call:
+	
+	myPlayer.resume();
+	
+To completely halt the player and stop the player Thread
+(saves CPU/Battery) call:
+
+	myPlayer.dispose();
+	
+To re-start a halted player you have to create a new player and add the 
+modules again: 
+	
+	Player myNewPlayer = new Player(44100, Player.INTERPOLATION_MODE_NONE);
+	moduleOne = myNewPlayer.addXM(myPlayer.getModule(moduleOne));
+	moduleTwo = myNewPlayer.addXM(myPlayer.getModule(moduleTwo));
+	myNewPlayer.play(moduleOne);
+
+Please take a look at the provided examples in the examples folder.
+	
+Design
+=======================================================================
 This library has been designed to do one thing only, and that is to
 make it easy to play .xm files!
 
@@ -181,28 +192,23 @@ devices such as desktops, or when doing off-line processing.
 To provide a sample rate of 96000 Hz or a cubic interpolation mode,
 pass these parameters when creating the player object:
 
-```haxe
 	... = new Player(96000, Player.INTERPOLATION_MODE_CUBIC);
-```
 	
 Since many platform assumes the standard 44100 samples/second sample
 rate, this is used as the default sample rate.
 
-##Interactive Music Support
+Interactive Music Support
+=======================================================================
 In version 1.3+ I have added basic support for "interactive" playback.
 This mean that it is possible to insert arbitrary note/row data during
 playback as well as support for pattern and row jumping. Two new functions
 are responsible for this functionality:
 
-```haxe
 	jump(moduleNumber:Int, patternIndex:Int, patternRow:Int, jumpStyle:Int=Player.JUMP_STYLE_JUMP)
-```
 	
 	and:
-
-```hax3	
+	
 	queueNoteData(moduleNumber:Int, channel:Int=-1, note:Int=-1, instrument:Int=-1, volume:Int=-1, effectType:Int=-1, effectParameter:Int=-1):Int
-```
 	
 The new interactive functions "jump" and "queueNoteData" make it possible
 to create custom XM-files that will work as sound banks/FX-bank.
@@ -220,8 +226,6 @@ to execute any typical tracker command at the time of playback of
 the next row and at that row only.
 
 Interactive Example 1 (jumping):
-
-```haxe
 	var p:Player = new Player(44100, Player.INTERPOLATION_MODE_LINEAR);
 	var m1:Int = p.loadXM(openfl.Assets.getBytes("assets/songBank01.xm"), -1)
 	p.play(m1, true, true);
@@ -237,11 +241,8 @@ Interactive Example 1 (jumping):
 	// this will jump to row 56 in the current pattern
 	// currently playing notes will be "cut" - instruments will stop playing immediately
 	p.jump(m1, -1, 56, Player.JUMP_STYLE_KEY_CUT_NOTES);
-```
 	
 Interactive Example 2 (note data insertion):
-
-```haxe
 	var p:Player = new Player(44100, Player.INTERPOLATION_MODE_LINEAR);
 	var m1:Int = p.loadXM(openfl.Assets.getBytes("assets/songBank01.xm"), -1)
 	p.play(m1, true, true);
@@ -265,7 +266,6 @@ Interactive Example 2 (note data insertion):
 	// at the next row this will play note 0x50 with instrument 2, with random panning
 	// (0xF + random byte) on an auto-selected channel, the volume column is left untouched
 	p.queueNoteData(m1, -1, 0x50, 2, -1, 0x08, Std.int(Math.random() * 255));
-```
 	
 A tip when entering global commands is that they should be allocated to a high
 channel number. This assures that they will override similar commands already
@@ -273,17 +273,19 @@ queued or preset in the pattern (like a global volume set or a pattern order
 command).
 
 Another value to experiment and fine-tune would be the BUFFER_SIZE constant
-set in "Player.hx". This value tells how many samples will
+set in "Player.java" or "Player.hx". This value tells how many samples will
 be written  to the device each time the SampleDataEvent is called and acts
 as a cap on the latency of new data triggered by the interactive functions.
 By default BUFFER_SIZE is set to 8192 samples in the HaXe version, but a
 lower value of 2048 is much more snappier and much more "interactive".
 
-A lower value will reduce latency, but a low value may tax the
+In the java version I've used 1024 samples and the latency is very low and
+quite good. A lower value will reduce latency, but a low value may tax the
 cpu/playback device too much and may the stop the stream due or cause
 audible droputs.
 
-## Development Resources
+Development Resources
+=======================================================================
 The following files and sources have been very helpful in decoding the
 .XM-file format and the playback effects:
 
@@ -294,15 +296,17 @@ The following files and sources have been very helpful in decoding the
 	
 For song creation and playback reference I've used OpenMPT.
 
-## Downloads
+Downloads
+=======================================================================
 TanjentXM is written and maintained by Jonas Murman at Tanjent. The
 initial development started in the summer of 2013 and the first
 version was released in January 2014.
 
 The latest version of this library will be available at
-http://www.tanjent.se/labs/tanjentxm.html (note: this site no longer exists)
+http://www.tanjent.se/labs/tanjentxm.html
 
-## Reporting Issues
+Reporting Issues
+=======================================================================
 If you find a module that does not play correctly, please visit the
 homepage and let me know!
 
@@ -310,8 +314,9 @@ If you manage to find a problem and correct it I would be very happy to
 incorporate your changes to the library, provided you are ready to
 license them under the MIT-license.
 
-## License
+License
+=======================================================================
 TanjentXM is licensed under the MIT-license. This means that you can use
 it free of charge, without strings attached in commercial and
-non-commercial projects. Please read LICENSE for the full license.
+non-commercial projects. Please read license.txt for the full license.
 

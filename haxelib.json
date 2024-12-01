@@ -1,0 +1,13 @@
+{
+  "name": "tanjentxm",
+  "license": "MIT",
+  "tags": ["music", "xm", "haxe", "internal"],
+  "description": "Library to play music in xm format",
+  "version": "1.0.0",
+  "classPath": "src/",
+  "releasenote": "Test release for haxelib git and others",
+  "contributors": ["Jonas Murman", "Stefan Dicu"],
+  "dependencies": {
+	  "openfl": "",
+  }  
+}

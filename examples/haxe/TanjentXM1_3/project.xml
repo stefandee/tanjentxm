@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	<!-- NMML reference: https://gist.github.com/1763850 -->
+	
+	<!-- metadata, make sure 'package' is at least 3 segments (ie. com.mycompany.myproject) -->
+	<meta title="TanjentXM Version 1.3" package="com.tanjent.tanjentxm" version="1.3.0" company="Tanjent" />
+	
+	<!-- output -->
+	<app main="Main" file="TanjentXM13" path="bin" />
+	
+	<window background="#000000" fps="60" />
+	<window width="640" height="480" unless="mobile" />
+	<window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
+	
+	<!-- classpath, haxe libs -->
+	<source path="src" />
+  <source path="../../../src" />
+	
+	<set name="openfl-legacy" />
+	<haxelib name="openfl" />
+	<haxelib name="actuate" />
+	
+	<!-- assets -->
+	<icon path="assets/openfl.svg" />
+	<assets path="assets" />
+	
+	<!-- optimize output
+	<haxeflag name="-dce full" /> -->
+	<android target-sdk-version="21" />
+	
+</project>

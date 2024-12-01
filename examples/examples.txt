@@ -1,0 +1,57 @@
+In this folder lies example projects to help you get started using the
+TanjentXM library!
+
+HaXe
+=======================================================================
+This example is a complete project. It is meant to be used with
+FlashDevelop. It should work on Flash, Windows and Android target.
+
+The compiled .swf file is about 187 kB with about 6 minutes of audio
+stored in 63 kB of raw data, made up of 4 .xm files.
+
+To use TanjentXM with this project copy the "tanjent" folder from the
+"tanjentxm_1_3\haxe_openfl\src\" to the "TanjentXM1_3\src" folder. Your
+complete folder structure should look like this when ready to compile:
+
+... tanjentxm_1_3\examples\haxe\TanjentXM1_3\src\Main.hx
+... tanjentxm_1_3\examples\haxe\TanjentXM1_3\src\tanjent\tanjentxm\FixedPoint.hx
+... tanjentxm_1_3\examples\haxe\TanjentXM1_3\src\tanjent\tanjentxm\Player.hx
+... tanjentxm_1_3\examples\haxe\TanjentXM1_3\src\tanjent\tanjentxm\ ...
+... tanjentxm_1_3\examples\haxe\TanjentXM1_3\src\tanjent\tanjentxm\XMSample.Hx
+
+The dynamic audio generation on the OpenFl/Lime (2.0.1) has a
+real bad bug - but it can be fixed, please read the readme.txt!
+Also make sure to check the OpenFL Forums or the OpenFL GitHub
+repository for the latest update on the Android OpenAL implementation.
+
+For the current OpenFL 3.1 make sure you use -Dlegacy mode to enable
+streaming sound. Hopefully this limitation will soon be fixed.
+
+Java
+=======================================================================
+Due to libgdx projects being rather large I've only included a typical
+main class "TanjentXM13Test.java" with some example code on how to
+setup, play and dispose the tanjentxm library as well as some
+keyboard interactivity to swap songs and trigger samples.
+
+The base project is the standard project produced by the new and
+improved gdx-setup.jar
+
+To use TanjentXM with Java/libgdx in a "real" project you will need
+to place some .xm files in the android assets folder (copy these from
+the HaXe example project's assets folder). Also you will need to
+reference/copy the TanjentXM java files from src/java_libgdx/*.* to
+the "com" root of the core libgdx project (as similar to the HaXe
+version). The final location of the added tanjentxm files should
+be something like this (in a project named TanjentXMTest):
+
+... TanjentXMTest\core\src\com\tanjent\tanjentxm\FixedPoint.java
+... TanjentXMTest\core\src\com\tanjent\tanjentxm\Player.java
+... TanjentXMTest\core\src\com\tanjent\tanjentxm\ ...
+... TanjentXMTest\core\src\com\tanjent\tanjentxm\XMSample.java
+
+Also, don't forget to refresh your project if you use Eclipse
+whenever you put something new in the android assets folder
+(Default key F5).
+
+Enjoy!

@@ -39,7 +39,7 @@ openfl test html5
 - 2014-08-20 (Version 1.2) 
   - Small fix and updated examples for OpenFL 2.0.1+** and libgdx 1.3.1+  
 - 2014-05-12 (Version 1.1) 
-  - Small fix and updated examples for OpenFL 1.4.0+ and libgdx 1.0+ |						 
+  - Small fix and updated examples for OpenFL 1.4.0+ and libgdx 1.0+			 
 - 2014-01-01 (Version 1.0)
   - First released version
 

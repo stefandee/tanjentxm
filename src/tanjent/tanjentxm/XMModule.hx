@@ -548,7 +548,7 @@ class XMModule
 			// fadeout active?
 			if (this.channel.fadeOut != XMInstrument.FADEOUT_MAX) {
 				this.channel.volumeFactorTickEnd *= (this.channel.fadeOut / XMInstrument.FADEOUT_MAX);
-				trace(this.channel.volumeFactorTickEnd + " " + this.channel.fadeOut + " " + XMInstrument.FADEOUT_MAX);
+				// trace(this.channel.volumeFactorTickEnd + " " + this.channel.fadeOut + " " + XMInstrument.FADEOUT_MAX);
 			}
 										
 			// panning envelope active?
@@ -1455,7 +1455,7 @@ class XMModule
 		// advance volume envelope
 		if (instrument.volumeEnvelopeEnabled == true && channel.volumeEnvelopeDone == false)
 		{			
-			trace(this.patternRow + " " + channel.volumeEnvelopeTick + " " + channel.volumeEnvelopeValue);
+			// trace(this.patternRow + " " + channel.volumeEnvelopeTick + " " + channel.volumeEnvelopeValue);
 			if (instrument.volumeEnvelopeTicks[channel.volumeEnvelopePoint] == channel.volumeEnvelopeTick)
 			{
 				if (instrument.volumeEnvelopeSustainEnabled == true &&

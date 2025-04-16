@@ -94,7 +94,7 @@ class Player
 
 	/**
 	 * Creates a new Player. The player will not mix sound until the play() function is called.
-	 * @param sampleRate the sample rate to use (usually 44100 samples/second).
+	 * @param sampleRate the sample rate to use (usually 44100 samples/second). This parameter is obsolete, we're always using Sound.sampleRate internally
 	 * @param interpolationMode the interpolation mode to use (Player.INTERPOLATION_MODE...)
 	 */	
 	public function new(sampleRate:Int = 44100, interpolationMode:Int = Player.INTERPOLATION_MODE_NONE) 
@@ -104,16 +104,22 @@ class Player
 		this.nextModule = null;
 		this.dummyModule = null;
 
-		// create the tickmixer and set interpolation mode and amplitude
-		this.setSampleRate(sampleRate);
-		this.setInterpolationMode(interpolationMode);	
-		this.setAmplitude(1.0);
-		
 		// create the sound
 		this.sound = new Sound();
 		this.sound.addEventListener(SampleDataEvent.SAMPLE_DATA, this.playerSampleDataEvent);
 		this.soundChannel = null;		
 		
+		//
+		// create the tickmixer and set interpolation mode and amplitude
+		//
+		
+		// Sound.sampleRate may differ depeding on the audio devices available (it can be 44100, 48000 or about any other value),
+		// so we are using it instead of the user supplied sampleRate. It might be possible to make TickMixer use a different sample rate
+		// than the Sound, although some refactoring might be required (and not sure it's entirely necessary)
+		this.setSampleRate(this.sound.sampleRate);
+		this.setInterpolationMode(interpolationMode);	
+		this.setAmplitude(1.0);
+						
 		// init buffer handling
 		this.samplesWritten = 0;
 		this.samplesLeftInBuffer = 0;
